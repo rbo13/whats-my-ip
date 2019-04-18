@@ -1,12 +1,12 @@
 package main
 
 import (
-	"io/ioutil"
+	"encoding/json"
 	"net/http"
 )
 
 func main() {
-	url := "http://httpbin.org/ip"
+	url := "https://api.ipify.org/?format=json"
 
 	res, err := http.Get(url)
 
@@ -16,11 +16,11 @@ func main() {
 
 	defer res.Body.Close()
 
-	byt, err := ioutil.ReadAll(res.Body)
+	var data map[string]string
 
-	if err != nil {
+	if err := json.NewDecoder(res.Body).Decode(&data); err != nil {
 		print(err)
 	}
 
-	print(string(byt))
+	print(data["ip"])
 }
