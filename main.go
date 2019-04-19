@@ -6,12 +6,18 @@ import (
 )
 
 func main() {
+	ip := IP()
+	print(ip)
+}
+
+// IP returns your current IP address.
+func IP() string {
 	url := "https://api.ipify.org/?format=json"
 
 	res, err := http.Get(url)
 
 	if err != nil {
-		print(err)
+		return err.Error()
 	}
 
 	defer res.Body.Close()
@@ -19,8 +25,8 @@ func main() {
 	var data map[string]string
 
 	if err := json.NewDecoder(res.Body).Decode(&data); err != nil {
-		print(err)
+		return err.Error()
 	}
 
-	print(data["ip"])
+	return data["ip"]
 }
