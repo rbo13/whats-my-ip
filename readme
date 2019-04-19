@@ -1,1 +1,10 @@
 checks your current ip, duuh? 🙄
+
+
+* installation:
+	- go get -u github.com/rbo13/whats-my-ip
+
+* running:
+	-	$ cd $GOPATH/src/rbo13/whats-my-ip
+	- go install
+	- $ whats-my-ip
